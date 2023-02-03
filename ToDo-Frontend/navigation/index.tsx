@@ -13,7 +13,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 import Welcome from "../screens/WelcomeScreen";
 import Home from "../screens/Home";
 import { RootStackParamList } from "../types";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
 
 const theme = {
   ...DefaultTheme,
@@ -42,7 +42,10 @@ function RootNavigator() {
 
   React.useEffect(() => {
     const checkLoggedIn = async () => {
-      const value = await AsyncStorage.getItem("token");
+      const value =
+        Platform.OS === "web"
+          ? localStorage.getItem("token")
+          : await AsyncStorage.getItem("token");
       if (value !== null) {
         setLoggedIn(true);
       }
