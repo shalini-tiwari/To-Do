@@ -17,9 +17,11 @@ mongoose.connect(
   () => console.log("Connected to DB")
 );
 
-
-app.use(cors());
-app.options('*', cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 //Middlewares
 app.use(express.json());
