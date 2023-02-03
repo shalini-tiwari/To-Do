@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cors = require('cors');
 
 //Import Routes
 const authRoute = require("./routes/auth");
@@ -15,6 +16,10 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("Connected to DB")
 );
+
+
+app.use(cors());
+app.options('*', cors());
 
 //Middlewares
 app.use(express.json());
