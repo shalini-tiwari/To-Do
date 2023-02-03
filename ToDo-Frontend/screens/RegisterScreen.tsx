@@ -31,7 +31,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     setIsLoaded(true);
     console.log("register", username, email, password);
     axios
-      .post("https://nodejs-jwt.onrender.com/api/user/register", {
+      .post("https://todo-backend-3wli.onrender.com/api/user/register", {
         name: username.toLowerCase(),
         email: email.toLowerCase(),
         password: password,
