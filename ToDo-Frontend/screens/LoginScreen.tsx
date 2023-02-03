@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   AsyncStorage,
+  Platform,
 } from "react-native";
 import React from "react";
 import Spacing from "../constants/Spacing";
@@ -39,10 +40,18 @@ const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
         }
       );
       console.log(response.data.user.name);
-      await AsyncStorage.setItem("id", response.data.user.id);
-      await AsyncStorage.setItem("name", response.data.user.name);
-      await AsyncStorage.setItem("email", response.data.user.email);
-      await AsyncStorage.setItem("token", response.data.token);
+
+      if (Platform.OS === "web") {
+        localStorage.setItem("id", response.data.user.id);
+        localStorage.setItem("name", response.data.user.name);
+        localStorage.setItem("email", response.data.user.email);
+        localStorage.setItem("token", response.data.token);
+      } else {
+        await AsyncStorage.setItem("id", response.data.user.id);
+        await AsyncStorage.setItem("name", response.data.user.name);
+        await AsyncStorage.setItem("email", response.data.user.email);
+        await AsyncStorage.setItem("token", response.data.token);
+      }
       setEmail("");
       setPassword("");
       setIsLoading(false);

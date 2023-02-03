@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Alert,
+  Platform,
 } from "react-native";
 
 interface Props {
@@ -26,8 +27,8 @@ const ProfilePage: React.FC<Props> = ({ navigation }) => {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem("token");
-    await AsyncStorage.clear();
+    // await AsyncStorage.removeItem("token");
+    // await AsyncStorage.clear();
     Alert.alert(
       "Logged out successfully!, Restart your application to see changes"
     );
@@ -36,9 +37,16 @@ const ProfilePage: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const name = await AsyncStorage.getItem("name");
-      const username = await AsyncStorage.getItem("name");
-      const email = await AsyncStorage.getItem("email");
+      if (Platform.OS === "web") {
+        const name = localStorage.getItem("name");
+        const username = localStorage.getItem("name");
+        const email = localStorage.getItem("email");
+      } else {
+        const name = await AsyncStorage.getItem("name");
+        const username = await AsyncStorage.getItem("name");
+        const email = await AsyncStorage.getItem("email");
+      }
+
       setName(name);
       setUsername(`@${username}`);
       setEmail(email);
