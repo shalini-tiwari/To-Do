@@ -32,7 +32,7 @@ const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     setIsLoading(true);
     try {
       const response: any = await axios.post(
-        "https://f087-103-77-46-71.in.ngrok.io/api/user/login",
+        "https://todo-backend-3wli.onrender.com/api/user/login",
         {
           email: email.toLowerCase(),
           password: password,
