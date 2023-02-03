@@ -11,7 +11,7 @@ dotenv.config();
 
 //Connect to DB
 mongoose.connect(
-  process.env.DB_CONNECT,
+  "mongodb+srv://admin:admin123@cluster0.0gv0jgu.mongodb.net/?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("Connected to DB")
 );
@@ -23,6 +23,4 @@ app.use(express.json());
 app.use("/api/user", authRoute);
 app.use("/api/posts", postRoute);
 
-app.listen(process.env.PORT, () =>
-  console.log("Server up and running at PORT: " + process.env.PORT)
-);
+app.listen(5000, () => console.log("Server up and running at PORT: " + 5000));
